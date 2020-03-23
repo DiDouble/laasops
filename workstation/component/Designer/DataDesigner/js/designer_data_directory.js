@@ -26,14 +26,18 @@ function init_designer_data_directory_tree_view() {
             , edit: ['add', 'update', 'del']
             , click: function (obj) {
                 const id = obj.data.id;
+                const cur_level_str = obj.data.cur_level_str;
+                vue_data.breadcrumb.list = [];
+                vue_data.breadcrumb.list = cur_level_str.split(",");
+                if (!id) {
+                    return;
+                }
+
                 const name = obj.data.title;
                 vue_data.designer_data_directory.cur_selected.name = name;
                 vue_data.designer_data_directory.cur_selected.id = id;
                 vue_data.designer_data_directory.cur_selected.description = obj.data.description;
 
-                if (!id) {
-                    return;
-                }
                 // just now support for one pane for every type
                 const tab_pane_id = id;
                 for (const index in vue_data.tab_pane) {
@@ -86,15 +90,17 @@ async function init_designer_data_directory() {
         const description_str = "description";
         const children_str = "children";
 
-        function setup_tree(pid) {
+        function setup_tree(pid, parent_level_str) {
             const cur_tree_level = [];
             let i = original_tree_list.length;
             while (i--) {
                 const originalTreeListElement = original_tree_list[i];
                 if (originalTreeListElement["pid"] == pid) {
                     original_tree_list.splice(i, 1);
-                    const next_tree_level = setup_tree(originalTreeListElement["id"]);
+                    const cur_level_str = parent_level_str + "," + originalTreeListElement["name"];
+                    const next_tree_level = setup_tree(originalTreeListElement["id"], cur_level_str);
                     const cur_tree_data = originalTreeListElement;
+                    cur_tree_data["cur_level_str"] = cur_level_str;
                     cur_tree_data[name_str] = originalTreeListElement["name"];
                     cur_tree_data[description_str] = originalTreeListElement[description_str];
                     cur_tree_data["spread"] = true;
@@ -107,7 +113,7 @@ async function init_designer_data_directory() {
             return cur_tree_level;
         }
 
-        const tree_data = setup_tree(null);
+        const tree_data = setup_tree(null, '');
         vue_data.designer_data_directory.tree = [{"title": "home", "children": tree_data, "spread": true, "id": null}];
         init_designer_data_directory_tree_view();
         component.$Message.success('query data_directory success');
@@ -206,7 +212,7 @@ async function delete_designer_data_directory(obj) {
             "sql": `
                 delete
                 from designer_data_directory
-                where id = %(id) s
+                where id = % (id) s
             `,
             "parameters": designer_data_directory,
         });

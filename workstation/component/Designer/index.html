@@ -48,6 +48,10 @@
         .ivu-menu-vertical .ivu-menu-item, .ivu-menu-vertical .ivu-menu-submenu-title {
             padding: 0 0px;
         }
+
+        .ivu-breadcrumb {
+            font-size: 22px;
+        }
     </style>
 </head>
 <body>
@@ -56,7 +60,15 @@
     <!--        <i-col span="24"></i-col>-->
     <!--    </row>-->
     <row style="height: 30px">
-        <i-col span="24"></i-col>
+        <i-col span="24">
+            <span>
+                <breadcrumb>
+                    <breadcrumb-item v-for="item in breadcrumb.list">
+                        {{item}}
+                    </breadcrumb-item>
+                </breadcrumb>
+            </span>
+        </i-col>
     </row>
     <row style="height: 94%;border: 1px solid #d6d6d6;">
         <span style="height: 100%;width: 2%;float: left;border: 1px solid #dcdee2">
@@ -90,7 +102,9 @@
                                   style="margin-left: 2px;">
                             <!--data-->
                             <div v-show="item.type=='data'">
-                                        <i-input v-model="designer_data_directory.cur_selected.description" :disabled="designer_data_directory.cur_selected.description_disabled" type="textarea">
+                                        <i-input v-model="designer_data_directory.cur_selected.description"
+                                                 :disabled="designer_data_directory.cur_selected.description_disabled"
+                                                 type="textarea">
                                         </i-input>
                                         <i-button type="primary"
                                                   @click="execute('designer_data_directory.do_update_designer_data_directory__description')">{{vue_data.designer_data_directory.cur_selected.description_btn_name}}</i-button>
@@ -123,6 +137,11 @@
 </div>
 <script>
     const vue_data = {
+        //
+        breadcrumb: {
+            list: [],
+            data_str: '',
+        },
         //
         menu_active_name: "data",
         menu_init_record: {},
