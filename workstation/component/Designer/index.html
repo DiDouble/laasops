@@ -90,7 +90,7 @@
                                   style="margin-left: 2px;">
                             <!--data-->
                             <div v-show="item.type=='data'">
-                                        <i-input :value="designer_data_directory.cur_selected.description" :disabled="designer_data_directory.cur_selected.description_disabled" type="textarea">
+                                        <i-input v-model="designer_data_directory.cur_selected.description" :disabled="designer_data_directory.cur_selected.description_disabled" type="textarea">
                                         </i-input>
                                         <i-button type="primary"
                                                   @click="execute('designer_data_directory.do_update_designer_data_directory__description')">{{vue_data.designer_data_directory.cur_selected.description_btn_name}}</i-button>
