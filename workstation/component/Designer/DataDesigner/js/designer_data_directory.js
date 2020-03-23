@@ -206,7 +206,7 @@ async function delete_designer_data_directory(obj) {
             "sql": `
                 delete
                 from designer_data_directory
-                where id = % (id) s
+                where id = %(id) s
             `,
             "parameters": designer_data_directory,
         });

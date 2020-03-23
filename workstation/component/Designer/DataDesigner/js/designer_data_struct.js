@@ -150,6 +150,7 @@ vue_data.data_struct = {
     columns: [
         editable_table_common_column("code", "code"),
         editable_table_common_column("meaning", "meaning"),
+        editable_table_common_column("reference_type", "reference_type"),
         editable_table_common_operation_column(),
     ],
     data: [],
@@ -233,8 +234,10 @@ async function query_designer_data_struct() {
         // query data_struct from distribution
         const net_request_result = await do_execute_sql({
             "sql": `
-                select id, code, meaning from designer_data_struct where did = %(did)s
-                `,
+                select id, code, meaning, reference_type
+                from designer_data_struct
+                where did = %(did) s
+            `,
             "parameters": data_struct,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
@@ -255,18 +258,24 @@ async function insert_designer_data_struct(data_struct) {
             "did": data_struct["did"],
             "column": data_struct["code"],
             "comment": data_struct["meaning"],
+            "reference_type": data_struct["reference_type"],
         };
-        net_request_result = await do_execute_sql({
-            "sql": `
+        let sql = `
                 ALTER TABLE designer_data_data_{{did}} ADD COLUMN {{column}} VARCHAR(255) DEFAULT NULL COMMENT '{{comment}}';
-                `.format(db_data),
+                `.format(db_data);
+        // if (data_struct["reference_type"] != '') {
+        //     sql += `ALTER TABLE designer_data_data_{{did}} ADD CONSTRAINT {{column}}_C FOREIGN KEY ({{column}}) REFERENCES {{reference_type}};`.format(db_data)
+        // }
+        net_request_result = await do_execute_sql({
+            "sql": sql,
         });
+
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
 
         // query data_struct from distribution
         net_request_result = await do_execute_sql({
             "sql": `
-                insert into designer_data_struct(did, code, meaning) values ({{did}},'{{code}}','{{meaning}}')
+                insert into designer_data_struct(did, code, meaning,reference_type ) values ({{did}},'{{code}}','{{meaning}}','{{reference_type}}')
                 `.format(data_struct),
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;

@@ -11,7 +11,7 @@ CREATE TABLE `designer_data_struct` (
   `did` int(11) NOT NULL,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `meaning` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT 'VARCHAR(255)',
+  `reference_type` varchar(100) COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
