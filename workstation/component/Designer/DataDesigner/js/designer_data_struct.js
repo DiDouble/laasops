@@ -236,7 +236,7 @@ async function query_designer_data_struct() {
             "sql": `
                 select id, code, meaning, reference_type
                 from designer_data_struct
-                where did = %(did) s
+                where did = %(did)s
             `,
             "parameters": data_struct,
         });
