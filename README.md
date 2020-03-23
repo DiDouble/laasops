@@ -6,13 +6,17 @@
 
 # 接下来
 
-升级数据设计器, 添加数据约束(基本&引用 数据类型), 加深拓扑关系
-
-distribution 添加version
-
 添加LogicDesigner, 使的将Data&Command可以串联起来形成业务
 
 添加执行引擎, 使得可以加载执行Logic
+
+
+
+升级数据设计器, 添加数据约束(基本&引用 数据类型), 加深拓扑关系
+
+Distribution 添加version
+
+
 
 改造DevOps项目(CoDo/tencent-bk)
 
