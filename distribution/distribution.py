@@ -20,6 +20,7 @@ def data():
             parameters = request_data["parameters"]
         else:
             parameters = {}
+        print("distribution/distribution: ", "sql: ", sql, "parameters: ", str(parameters))
         execute_result = mymysql.execute(sql, parameters)
         return json.dumps(execute_result)
     except MyServiceException as e:
