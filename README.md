@@ -1,6 +1,6 @@
 # 目前进度
 
-![simple_architecture](docs/current_progress/2020-03-23_20-04/1.png)
+![simple_architecture](docs/current_progress/2020-03-24_05-49/1.png)
 
 ![simple_architecture](docs/current_progress/2020-03-23_20-04/2.png)
 
