@@ -90,8 +90,13 @@
                                   style="margin-left: 2px;">
                             <!--data-->
                             <div v-show="item.type=='data'">
+                                        <i-input :value="designer_data_directory.cur_selected.description" :disabled="designer_data_directory.cur_selected.description_disabled" type="textarea">
+                                        </i-input>
+                                        <i-button type="primary"
+                                                  @click="execute('designer_data_directory.do_update_designer_data_directory__description')">{{vue_data.designer_data_directory.cur_selected.description_btn_name}}</i-button>
                                         <i-button type="primary"
                                                   @click="execute('data_struct.do_insert_designer_data_struct')">add one line</i-button>
+
                                         <i-table stripe border :columns="data_struct.columns"
                                                  :data="data_struct.data"
                                                  :loading="data_struct.loading"
@@ -101,7 +106,7 @@
                             <!--logic-->
                             <div v-show="item.type=='logic'">
                                 <textarea id="code" name="code"
-                                          >
+                                >
                                 </textarea>
                             </div>
                         </tab-pane>

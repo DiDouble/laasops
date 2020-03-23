@@ -1,8 +1,19 @@
+const update_description_btn_str = "update description";
+const save_description_btn_str = "save description";
+
 vue_data.designer_data_directory = {
     tree: [],
     cur_selected: {
         name: "",
         id: "",
+        description: "",
+        description_disabled: true,
+        description_btn_name: update_description_btn_str,
+    },
+};
+vue_methods.designer_data_directory = {
+    do_update_designer_data_directory__description: function () {
+        update_designer_data_directory__description();
     },
 };
 
@@ -18,6 +29,8 @@ function init_designer_data_directory_tree_view() {
                 const name = obj.data.title;
                 vue_data.designer_data_directory.cur_selected.name = name;
                 vue_data.designer_data_directory.cur_selected.id = id;
+                vue_data.designer_data_directory.cur_selected.description = obj.data.description;
+
                 if (!id) {
                     return;
                 }
@@ -40,6 +53,8 @@ function init_designer_data_directory_tree_view() {
                 });
                 vue_data.tab_pane_cur = vue_data.tab_pane.length - 1;
                 vue_methods.data_struct.do_query_designer_data_struct();
+
+
             }
             , operate: function (obj) {
                 const type = obj.type;
@@ -60,13 +75,15 @@ async function init_designer_data_directory() {
         // query designer_data_directory from distribution
         const net_request_result = await do_execute_sql({
             "sql": `
-                select id,pid,name,description from designer_data_directory
-                `,
+                select id, pid, name, description
+                from designer_data_directory
+            `,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
         let original_tree_list = net_request_result.data;
         // adapter list to tree
         const name_str = "title";
+        const description_str = "description";
         const children_str = "children";
 
         function setup_tree(pid) {
@@ -79,6 +96,7 @@ async function init_designer_data_directory() {
                     const next_tree_level = setup_tree(originalTreeListElement["id"]);
                     const cur_tree_data = originalTreeListElement;
                     cur_tree_data[name_str] = originalTreeListElement["name"];
+                    cur_tree_data[description_str] = originalTreeListElement[description_str];
                     cur_tree_data["spread"] = true;
                     if (next_tree_level.length > 0) {
                         cur_tree_data[children_str] = next_tree_level;
@@ -107,8 +125,9 @@ async function add_designer_data_directory(obj) {
         // save to distribution
         let net_request_result = await do_execute_sql({
             "sql": `
-                insert into designer_data_directory(pid,name) values (%(pid)s, %(name)s)
-                `,
+                insert into designer_data_directory(pid, name)
+                values (%(pid) s, %(name) s)
+            `,
             "parameters": designer_data_directory,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
@@ -143,8 +162,10 @@ async function update_designer_data_directory(obj) {
         // save to distribution
         const net_request_result = await do_execute_sql({
             "sql": `
-                update designer_data_directory set name = %(name)s where id = %(id)s
-                `,
+                update designer_data_directory
+                set name = %(name) s
+                where id = %(id) s
+            `,
             "parameters": designer_data_directory,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
@@ -183,8 +204,10 @@ async function delete_designer_data_directory(obj) {
         // save to distribution
         net_request_result = await do_execute_sql({
             "sql": `
-                delete from designer_data_directory where id = %(id)s
-                `,
+                delete
+                from designer_data_directory
+                where id = % (id) s
+            `,
             "parameters": designer_data_directory,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
@@ -192,6 +215,39 @@ async function delete_designer_data_directory(obj) {
         component.$Message.success('delete success');
         // close the data struct
         vue_data.data_struct.show = false;
+        await init_designer_data_directory();
+    } catch (e) {
+        console.log(e);
+        component.$Message.error(e.response.data);
+    }
+}
+
+async function update_designer_data_directory__description() {
+    if (vue_data.designer_data_directory.cur_selected.description_disabled) {
+        vue_data.designer_data_directory.cur_selected.description_disabled = false;
+        vue_data.designer_data_directory.cur_selected.description_btn_name = save_description_btn_str;
+        return;
+    }
+    vue_data.designer_data_directory.cur_selected.description_disabled = true;
+    vue_data.designer_data_directory.cur_selected.description_btn_name = update_description_btn_str;
+    try {
+        // prepare data directory data
+        const designer_data_directory = {
+            "id": vue_data.designer_data_directory.cur_selected.id,
+            "description": vue_data.designer_data_directory.cur_selected.description,
+        };
+        // save to distribution
+        const net_request_result = await do_execute_sql({
+            "sql": `
+                update designer_data_directory
+                set description = %(description) s
+                where id = %(id) s
+            `,
+            "parameters": designer_data_directory,
+        });
+        if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
+        component.$Message.success('update description success');
+        vue_data.designer_data_directory.cur_selected.description_disabled = true;
         await init_designer_data_directory();
     } catch (e) {
         console.log(e);
