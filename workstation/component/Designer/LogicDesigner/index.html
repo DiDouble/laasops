@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CommandDesigner</title>
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="dependency/codemirror-5.52.0/doc/docs.css">
+    <link href="dependency/codemirror-5.52.0/lib/codemirror.css" rel="stylesheet" type="text/css">
+    <link href="dependency/codemirror-5.52.0/theme/monokai.css" rel="stylesheet" type="text/css">
+    <link href="dependency/codemirror-5.52.0/addon/display/fullscreen.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="dependency/codemirror-5.52.0/lib/codemirror.js"></script>
+    <!-- active-line & matchbrackets & fullscreen -->
+    <script type="text/javascript" src="dependency/codemirror-5.52.0/addon/selection/active-line.js"></script>
+    <script type="text/javascript" src="dependency/codemirror-5.52.0/addon/edit/matchbrackets.js"></script>
+    <script type="text/javascript" src="dependency/codemirror-5.52.0/addon/display/fullscreen.js"></script>
+    <!-- for language-->
+    <script type="text/javascript" src="dependency/codemirror-5.52.0/mode/python/python.js"></script>
+    <style>.CodeMirror {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }</style>
+</head>
+<body style="padding: 100px">
+<textarea id="code" name="code" style="width: 100%;height: 50vh">
+    print("hello world")
+</textarea>
+</body>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        indentUnit: 4,
+        styleActiveLine: true,
+        matchBrackets: true,
+        mode: {
+            name: "python",
+            version: 3,
+            singleLineStringErrors: false
+        },
+        lineWrapping: true,
+        theme: 'monokai',
+    });
+    editor.setOption("extraKeys", {
+        Tab: function (cm) {
+            var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+            cm.replaceSelection(spaces);
+        },
+        "F11": function (cm) {
+            cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+        },
+        "Esc": function (cm) {
+            if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+        }
+    });
+</script>
+</html>
