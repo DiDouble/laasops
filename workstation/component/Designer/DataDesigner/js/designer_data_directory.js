@@ -110,7 +110,7 @@ async function init_designer_data_directory() {
         const tree_data = setup_tree(null);
         vue_data.designer_data_directory.tree = [{"title": "home", "children": tree_data, "spread": true, "id": null}];
         init_designer_data_directory_tree_view();
-        component.$Message.success('query success');
+        component.$Message.success('query data_directory success');
     } catch (e) {
         console.log(e);
         component.$Message.error(e.response.data);
@@ -144,7 +144,7 @@ async function add_designer_data_directory(obj) {
                 `.format(db_data),
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
-        component.$Message.success('add success');
+        component.$Message.success('add data_directory success');
         await init_designer_data_directory();
     } catch (e) {
         console.log(e);
@@ -169,7 +169,7 @@ async function update_designer_data_directory(obj) {
             "parameters": designer_data_directory,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
-        component.$Message.success('update success');
+        component.$Message.success('update data_directory success');
         await init_designer_data_directory();
     } catch (e) {
         console.log(e);
@@ -212,7 +212,7 @@ async function delete_designer_data_directory(obj) {
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
 
-        component.$Message.success('delete success');
+        component.$Message.success('delete data_directory success');
         // close the data struct
         vue_data.data_struct.show = false;
         await init_designer_data_directory();
@@ -246,7 +246,7 @@ async function update_designer_data_directory__description() {
             "parameters": designer_data_directory,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
-        component.$Message.success('update description success');
+        component.$Message.success('update data_directory__description success');
         vue_data.designer_data_directory.cur_selected.description_disabled = true;
         await init_designer_data_directory();
     } catch (e) {

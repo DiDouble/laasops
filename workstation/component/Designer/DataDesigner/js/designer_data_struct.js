@@ -239,7 +239,7 @@ async function query_designer_data_struct() {
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
         vue_data.data_struct.data = net_request_result.data;
-        component.$Message.success('query success');
+        component.$Message.success('query data_struct success');
     } catch (e) {
         console.log(e);
         component.$Message.error(e.response.data);
@@ -271,7 +271,7 @@ async function insert_designer_data_struct(data_struct) {
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
 
-        component.$Message.success('insert success');
+        component.$Message.success('insert data_struct success');
         query_designer_data_struct();
     } catch (e) {
         console.log(e.response.data);
@@ -306,7 +306,7 @@ async function update_designer_data_struct(data_struct) {
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
         console.log(vue_data.data_struct.data_line_backup);
 
-        component.$Message.success('update success');
+        component.$Message.success('update data_struct success');
         query_designer_data_struct();
     } catch (e) {
         console.log(e.response.data);
@@ -338,7 +338,7 @@ async function delete_designer_data_struct(data_struct) {
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
 
-        component.$Message.success('delete success');
+        component.$Message.success('delete data_struct success');
         query_designer_data_struct();
     } catch (e) {
         console.log(e.response.data);
