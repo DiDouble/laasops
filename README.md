@@ -1,3 +1,13 @@
+# 目前进度
+
+![simple_architecture](docs/current_progress/2020-03-23_20-04/1.png)
+
+![simple_architecture](docs/current_progress/2020-03-23_20-04/2.png)
+
+# 接下来
+
+
+
 # 总体来说
 
 从数据的角度驱动由分发、组装由数据和指令库构造的逻辑
