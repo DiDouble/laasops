@@ -1,34 +1,32 @@
-[English](README.md) | [中文](README_zh_CN.md)
+# 工作台
 
-# Workstation
+## [设计器](component/Designer/README_zh_CN.md)
+## 用户面板
 
-## [Designer](component/Designer/README.md)
-## DashBoard
+### 数据面板
 
-### DataBoard
+#### 数据操作
 
-#### DataBoardOperate
+#### 数据展示
 
-#### DataBoardShow
+##### 套版
 
-##### DataBoardShowBoxing
+##### 拓扑
 
-##### DataBoardShowTopology
+#### 数据状态
 
-#### DataBoardStatus
+### 使用者面板
 
-### UserBoard
+#### 用户
 
-#### User
+#### 角色
 
-#### Role
+#### 流程
 
-#### Process
+#### 权限
 
-#### Authority
+### 审计
 
-### Audit
+# 研究
 
-# Research
-
-[bk-cmdb](docs/research/bk-cmdb.md)
+[腾讯蓝鲸cmdb](docs/research/bk-cmdb.md)
