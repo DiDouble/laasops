@@ -26,9 +26,17 @@ function init_designer_data_directory_tree_view() {
             , edit: ['add', 'update', 'del']
             , click: function (obj) {
                 const id = obj.data.id;
-                const cur_level_str = obj.data.cur_level_str;
+                // set the breadcrumb
                 vue_data.breadcrumb.list = [];
-                vue_data.breadcrumb.list = cur_level_str.split(",");
+                const cur_level_str = obj.data.cur_level_str;
+                if (cur_level_str) {
+                    vue_data.breadcrumb.list = cur_level_str.split(",");
+                }
+                // set the directory id
+                vue_data.breadcrumb.cur_selected_id = "";
+                if (id) {
+                    vue_data.breadcrumb.cur_selected_id = id;
+                }
                 if (!id) {
                     return;
                 }

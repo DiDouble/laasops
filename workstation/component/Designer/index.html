@@ -51,6 +51,7 @@
 
         .ivu-breadcrumb {
             font-size: 22px;
+            float: left;
         }
     </style>
 </head>
@@ -67,6 +68,9 @@
                         {{item}}
                     </breadcrumb-item>
                 </breadcrumb>
+            </span>
+            <span style="color: green;margin-left: 30px;font-size: 22px;">
+                id: {{breadcrumb.cur_selected_id}}
             </span>
         </i-col>
     </row>
@@ -140,7 +144,7 @@
         //
         breadcrumb: {
             list: [],
-            data_str: '',
+            cur_selected_id: '',
         },
         //
         menu_active_name: "data",
