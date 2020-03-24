@@ -3,7 +3,44 @@ vue_data.designer_logic_data = {
     cur_writing: {
         id: "",
     },
+    standard: {
+        display: false,
+    }
 };
+vue_data.designer_logic_data.standard.content =`
+// 声明运行环境规范:
+runtime.require([ // 安装依赖
+\t'PyYAML:0.0.1',
+\t'kubernetes:8.0.0',
+])
+json = runtime.import('json')
+run_manage = runtime.import('service.project_manage.work_order_process.run_manage')
+
+// 声明数据操作规范
+data_define = { // 静态
+\t'get':[
+\t\t'aliyun',
+\t\t'host',
+\t],
+\t'set':[
+\t\t'aliyun'
+\t],
+\t'trigger':[
+\t\t'aliyun.insert':'import_aliyun_ecs'
+\t]
+}
+data.define(data_define) // 动态
+
+
+data.get.sql(' select host, port, username, password from host where env="%(env)s" ',{env: 'test'})
+data.get.sql(' select username, password from aliyun ')
+data.set('insert', ' insert into aliyun(username, password) values('%(username)s', '%(password)s') ', {username: 'xxx', password: 'xxx'})
+data.set('update', ' update host set password where id = "%(id)s" ', {id: '1'})
+data.set('delete', ' delete from aliyun where username = "%(username)s" ', {username: 'xxx'})
+
+
+
+`;
 
 async function init_designer_logic_data_file_view() {
     const editor_ta = document.getElementById("code");
@@ -48,8 +85,10 @@ async function query_designer_logic_data() {
         // query data_struct from distribution
         const net_request_result = await do_execute_sql({
             "sql": `
-                select id, file from designer_logic_data where did = %(did)s
-                `,
+                select id, file
+                from designer_logic_data
+                where did = %(did)s
+            `,
             "parameters": data_struct,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;
@@ -73,8 +112,10 @@ async function update_designer_logic_data() {
         // query data_struct from distribution
         const net_request_result = await do_execute_sql({
             "sql": `
-                update designer_logic_data set file = %(file)s where id = %(id)s
-                `,
+                update designer_logic_data
+                set file = %(file)s
+                where id = %(id)s
+            `,
             "parameters": data_struct,
         });
         if (!net_request_result || !net_request_result.status || net_request_result.status != 200 || !net_request_result.data) return;

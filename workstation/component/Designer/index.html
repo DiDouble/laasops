@@ -150,9 +150,9 @@
                             </div>
                             <!--logic-->
                             <div v-show="item.type=='logic'">
-                                <textarea id="code" name="code"
-                                >
-                                </textarea>
+                                language: Python; Version: 3+; <i-button type="primary" @click="designer_logic_data.standard.display = true">Show Standard</i-button>
+                                    <modal v-model="designer_logic_data.standard.display" title="Logic Coding Standard" ><pre v-html='designer_logic_data.standard.content'></pre></modal>
+                                <textarea id="code" name="code"></textarea>
                             </div>
                         </tab-pane>
                     </tabs>
