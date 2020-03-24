@@ -1,3 +1,5 @@
+# [在线体验](https://preview.laashub.com)
+
 # 目前进度
 
 ![simple_architecture](docs/current_progress/2020-03-24_05-49/1.png)
@@ -73,20 +75,17 @@
 
 # 部署
 
-参考 https://hub.docker.com/r/laashub/laasops
+## 项目
 
-```
-mkdir -p /data/tristan/laashub/laasops/distribution/configs/
-mv application.yml /data/tristan/laashub/laasops/distribution/configs/application.yml
+镜像仓库地址: https://hub.docker.com/r/laashub/laasops
 
-docker stop laasops
-docker rm laasops
+部署文档请参考 dependency/laasops.sh 文件
 
-docker run -d --name laasops -p 80:5000 -v /data/tristan/laashub/laasops/distribution/configs:/usr/src/app/distribution/configs  laashub/laasops
-docker logs -f --tail 100 laasops
+## HTTPS
 
-docker exec -it laasops bash
-```
+依赖Nginx, 请参考 dependency/nginx.sh 文件
 
-依赖MySQL, 参考 distribution/dependency/mysql.sh 文件
+## 中间件
+
+依赖MySQL, 请参考 distribution/dependency/mysql.sh 文件
 
