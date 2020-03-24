@@ -6,25 +6,17 @@
 
 # 接下来
 
-加深拓扑关系
-
-添加数据输入管道/输出管道/订阅/触发
-
-
+添加数据输入/输出/订阅/触发 管道
 
 添加LogicDesigner, 使的将Data&Command可以串联起来形成业务
+
+
 
 添加执行引擎, 使得可以加载执行Logic
 
 
 
-
-
-Distribution 添加version
-
-
-
-改造DevOps项目(CoDo/tencent-bk)
+模拟DevOps场景以调整已有功能
 
 ......
 
@@ -36,7 +28,7 @@ Distribution 添加version
 
 # LaasHub 组成元素
 
-## 工作站
+## 工作站	
 
 ### 设计器
 

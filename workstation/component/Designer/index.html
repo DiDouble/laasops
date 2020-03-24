@@ -118,8 +118,35 @@
                                         <i-table stripe border :columns="data_struct.columns"
                                                  :data="data_struct.data"
                                                  :loading="data_struct.loading"
-                                                 style="height: 100vh"
                                         ></i-table>
+                                        <collapse>
+                                            <panel>
+                                                数据输入管道
+                                                <p slot="content"
+                                                   v-for="item in designer_data_directory.channel.data_input">{{item}}</p>
+                                            </panel>
+                                        </collapse>
+                                        <collapse>
+                                            <panel>
+                                                数据输出管道
+                                                <p slot="content"
+                                                   v-for="item in designer_data_directory.channel.data_output">{{item}}</p>
+                                            </panel>
+                                        </collapse>
+                                        <collapse>
+                                            <panel>
+                                                数据订阅管道
+                                                <p slot="content"
+                                                   v-for="item in designer_data_directory.channel.data_subscribe">{{item}}</p>
+                                            </panel>
+                                        </collapse>
+                                        <collapse>
+                                            <panel>
+                                                数据触发管道
+                                                <p slot="content"
+                                                   v-for="item in designer_data_directory.channel.data_trigger">{{item}}</p>
+                                            </panel>
+                                        </collapse>
                             </div>
                             <!--logic-->
                             <div v-show="item.type=='logic'">

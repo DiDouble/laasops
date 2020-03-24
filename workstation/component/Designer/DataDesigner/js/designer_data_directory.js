@@ -10,6 +10,12 @@ vue_data.designer_data_directory = {
         description_disabled: true,
         description_btn_name: update_description_btn_str,
     },
+    channel: {
+        data_input: [],
+        data_output: [],
+        data_subscribe: [],
+        data_trigger: [],
+    },
 };
 vue_methods.designer_data_directory = {
     do_update_designer_data_directory__description: function () {
@@ -140,7 +146,7 @@ async function add_designer_data_directory(obj) {
         let net_request_result = await do_execute_sql({
             "sql": `
                 insert into designer_data_directory(pid, name)
-                values (%(pid)s, %(name)s)
+                values (%(pid) s, %(name) s)
             `,
             "parameters": designer_data_directory,
         });
@@ -177,8 +183,8 @@ async function update_designer_data_directory(obj) {
         const net_request_result = await do_execute_sql({
             "sql": `
                 update designer_data_directory
-                set name = %(name)s
-                where id = %(id)s
+                set name = %(name) s
+                where id = %(id) s
             `,
             "parameters": designer_data_directory,
         });
@@ -220,7 +226,7 @@ async function delete_designer_data_directory(obj) {
             "sql": `
                 delete
                 from designer_data_directory
-                where id = %(id)s
+                where id = % (id) s
             `,
             "parameters": designer_data_directory,
         });
@@ -254,8 +260,8 @@ async function update_designer_data_directory__description() {
         const net_request_result = await do_execute_sql({
             "sql": `
                 update designer_data_directory
-                set description = %(description)s
-                where id = %(id)s
+                set description = %(description) s
+                where id = %(id) s
             `,
             "parameters": designer_data_directory,
         });
