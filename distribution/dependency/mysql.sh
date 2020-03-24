@@ -39,7 +39,7 @@ mysql -uroot -p
 # 输入: tristan123
 
 # 修改访问设置
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'tristan123';
+ALTER USER 'laashub'@'%' IDENTIFIED WITH mysql_native_password BY 'laashub123';
 
 # 刷新权限
 FLUSH PRIVILEGES;
