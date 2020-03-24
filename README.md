@@ -6,9 +6,12 @@
 
 # 接下来
 
-添加数据输入/输出/订阅/触发 管道
-
 添加LogicDesigner, 使的将Data&Command可以串联起来形成业务
+
+​		定义logic的编码规则
+​		运行logic(拓展、性能、稳定、规范)
+
+添加数据输入/输出/订阅/触发 管道
 
 
 
@@ -68,3 +71,12 @@
 
 引擎执行逻辑业务
 
+# 部署
+
+参考 https://hub.docker.com/r/laashub/laasops
+
+```
+docker run -d --name laasops -p 5000:80 -v distribution/configs/application.yml:distribution/configs/application.yml  laashub/laasops
+```
+
+依赖MySQL, 参考 distribution/dependency/mysql.sh 文件
