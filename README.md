@@ -4,14 +4,12 @@
 
 ![simple_architecture](docs/current_progress/2020-03-24_05-49/1.png)
 
-![simple_architecture](docs/current_progress/2020-03-23_20-04/2.png)
+![simple_architecture](docs/current_progress/2020-03-25_0401/2.png)
 
 # 接下来
 
 添加LogicDesigner, 使的将Data&Command可以串联起来形成业务
-
-​		定义logic的编码规则
-​		运行logic(拓展、性能、稳定、规范)
+		运行logic(拓展、性能、稳定、规范)
 
 添加数据输入/输出/订阅/触发 管道
 
