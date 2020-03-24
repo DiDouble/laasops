@@ -1,7 +1,7 @@
 from contextlib import closing
 
 import pymysql
-from DBUtils.PersistentDB import PersistentDB
+from DBUtils.PooledDB import PooledDB
 
 from . import mymysql
 from ..exception import MyServiceException
@@ -12,7 +12,7 @@ db_pool = None
 def init(mysql_config):
     if not db_pool:
         mysql_config["cursorclass"] = pymysql.cursors.DictCursor
-        mymysql.db_pool = PersistentDB(pymysql, **mysql_config)
+        mymysql.db_pool = PooledDB(pymysql, **mysql_config)
 
 
 def execute(sql, parameters={}):

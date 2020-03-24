@@ -24,6 +24,7 @@ def data():
         execute_result = mymysql.execute(sql, parameters)
         return json.dumps(execute_result)
     except MyServiceException as e:
+        print("e.msg: ", e.msg)
         custom_res = make_response(e.msg)
         custom_res.status = "500"
         return custom_res
