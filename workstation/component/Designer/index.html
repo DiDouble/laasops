@@ -121,28 +121,28 @@
                                         ></i-table>
                                         <collapse>
                                             <panel>
-                                                Data Input Channel
+                                                Data Input Channel(Data input from Logic)
                                                 <p slot="content"
                                                    v-for="item in designer_data_directory.channel.data_input">{{item}}</p>
                                             </panel>
                                         </collapse>
                                         <collapse>
                                             <panel>
-                                                Data Output Channel
+                                                Data Output Channel(Data output to Logic)
                                                 <p slot="content"
                                                    v-for="item in designer_data_directory.channel.data_output">{{item}}</p>
                                             </panel>
                                         </collapse>
                                         <collapse>
                                             <panel>
-                                                Data Subscribe Channel
+                                                // Data Subscribe Channel(Logic makes the data subscribe to its own changes(running/pause/exception/finish),after the logic changes,it will trigger time to the data,and the data will change)
                                                 <p slot="content"
                                                    v-for="item in designer_data_directory.channel.data_subscribe">{{item}}</p>
                                             </panel>
                                         </collapse>
                                         <collapse>
                                             <panel>
-                                                Data Trigger Channel
+                                               Data Trigger Channel(Logic subscribe to the data change(crud),after the data chanages, the event will be triggered to the logic, and the logic will be executed)
                                                 <p slot="content"
                                                    v-for="item in designer_data_directory.channel.data_trigger">{{item}}</p>
                                             </panel>
