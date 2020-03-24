@@ -40,10 +40,12 @@ echo "设置docker加速器"
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://e3pl45dl.mirror.aliyuncs.com"]
+   "registry-mirrors": [
+       "https://mirror.ccs.tencentyun.com"
+  ]
 }
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 
-hostnamectl set-hostname `ip a show dev ens33|grep -w inet|awk '{print $2}'|awk -F '/' '{print $1}'`
+hostnamectl set-hostname `ip a show dev eth0|grep -w inet|awk '{print $2}'|awk -F '/' '{print $1}'`
