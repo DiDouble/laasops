@@ -8,9 +8,7 @@
 
 加深拓扑关系
 
-添加数据订阅/触发/输入管道/输出管道
-
-
+添加数据输入管道/输出管道/订阅/触发
 
 
 
@@ -41,6 +39,8 @@ Distribution 添加version
 ## 工作站
 
 ### 设计器
+
+![simple_architecture](docs/images/Designer-basic-think.png)
 
 #### 数据模型设计器
 
