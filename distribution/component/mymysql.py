@@ -7,7 +7,9 @@ from . import mymysql
 from ..exception import MyServiceException
 
 db_pool = None
-
+"""
+https://cito.github.io/DBUtils/UsersGuide.html#pooleddb
+"""
 
 def init(mysql_config):
     if not db_pool:
